@@ -18,7 +18,7 @@ group :development, :test do
   gem "awesome_print"
   gem "pry-rails"
   gem "factory_girl_rails"
-  gem "rspec-rails", "~> 3.1.0"
+  gem "rspec-rails", "3.4.2"
   gem "ffaker"
 end
 
