@@ -4,7 +4,21 @@ class Log < ActiveRecord::Base
 
   validates :event, presence: true
 
+  after_create :get_drone_from_mac_address
+
   def ground_station_area_id
     self.ground_station.area_id
+  end
+
+  def get_drone_from_mac_address
+    drone = Drone.find_or_initialize_by mac_address: self.drone_mac_address
+
+    if drone.new_record?
+      self.event = 'new_detected'
+      drone.save
+    end
+
+    self.drone = drone
+    self.save
   end
 end
