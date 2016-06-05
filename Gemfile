@@ -20,7 +20,12 @@ group :development, :test do
   gem "factory_girl_rails"
   gem "rspec-rails", "3.4.2"
   gem "ffaker"
-  gem 'shoulda-matchers', '~> 3.1'
+end
+
+# Test gems
+group :test do
+  gem "shoulda-matchers", "~> 3.1"
+  gem "database_cleaner"
 end
 
 # Production and staging gems
