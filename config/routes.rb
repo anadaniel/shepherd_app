@@ -7,7 +7,7 @@ Rails.application.routes.draw do
                                              :defaults => {:format => :json}, :default => true) do
       
       resources :logs, only: [:index]
-      resources :ground_stations, only: [:index] do
+      resources :ground_stations, only: [:index, :create] do
         resources :logs, only: [:create]
       end
     end
