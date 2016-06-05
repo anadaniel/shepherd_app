@@ -11,5 +11,6 @@ RSpec.describe Drone, type: :model do
 
   context 'validations' do
     it { is_expected.to validate_presence_of :mac_address }
+    it { is_expected.to validate_uniqueness_of :mac_address }
   end
 end
