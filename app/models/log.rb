@@ -4,7 +4,7 @@ class Log < ActiveRecord::Base
 
   validates :event, presence: true
 
-  after_create :get_drone_from_mac_address
+  after_create :get_drone_from_mac_address, if: Proc.new { self.drone_mac_address.present? }
 
   def ground_station_area_id
     self.ground_station.area_id

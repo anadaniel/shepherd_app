@@ -27,7 +27,8 @@ RSpec.describe Api::V1::LogsController, type: :controller do
 
     it { should respond_with :created }
     it { expect(json_response).to have_key(:log) }
-    it { expect(json_response[:log][:event]).to eq 'detected' }
+    it { expect(json_response[:log][:drone_id]).to_not be_blank }
+    it { expect(json_response[:log][:event]).to eq 'new_detected' }
   end
 
 end
