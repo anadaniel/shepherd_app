@@ -7,6 +7,7 @@ gem "active_model_serializers", github: "rails-api/active_model_serializers", br
 gem "rails", "4.2.1"
 gem "pg"
 gem "puma"
+gem "rack-cors", :require => "rack/cors"
 
 group :development do
   gem "spring"
