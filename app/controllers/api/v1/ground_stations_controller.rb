@@ -13,6 +13,15 @@ class Api::V1::GroundStationsController < ApplicationController
     end
   end
 
+  def update
+    ground_station = GroundStation.find_by id: params[:id]
+    if ground_station.present? and ground_station.update ground_station_params
+      render json: ground_station, status: :ok
+    else
+      head :unprocessable_entity
+    end
+  end
+
   private
     def ground_station_params
       params.require(:ground_station).permit(:area_id, :lat, :long)

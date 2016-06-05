@@ -30,4 +30,15 @@ RSpec.describe Api::V1::GroundStationsController, type: :controller do
     it { expect(json_response).to have_key(:ground_station) }
     it { expect(json_response[:ground_station][:lat]).to eq '25.678653' }
   end
+
+  describe "POST #update" do
+    before do
+      ground_station = FactoryGirl.create :ground_station, long: -200.000000
+      put :update, { id: ground_station.id, ground_station: { long: '-100.000000' } }
+    end
+
+    it { should respond_with :ok }
+    it { expect(json_response).to have_key(:ground_station) }
+    it { expect(json_response[:ground_station][:long]).to eq '-100.0' }
+  end
 end
