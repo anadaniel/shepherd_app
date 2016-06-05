@@ -11,10 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160605155720) do
+ActiveRecord::Schema.define(version: 20160605195650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "drones", force: :cascade do |t|
+    t.string   "mac_address"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "ground_stations", force: :cascade do |t|
     t.integer  "area_id"
@@ -30,6 +36,7 @@ ActiveRecord::Schema.define(version: 20160605155720) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.integer  "ground_station_id"
+    t.integer  "drone_id"
   end
 
 end

@@ -16,5 +16,6 @@ RSpec.describe Log, :type => :model do
 
   context 'associations' do
     it { is_expected.to belong_to :ground_station }
+    it { is_expected.to belong_to :drone }
   end
 end

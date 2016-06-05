@@ -1,5 +1,6 @@
 class Log < ActiveRecord::Base
   belongs_to :ground_station
+  belongs_to :drone
 
   validates :event, presence: true
 
