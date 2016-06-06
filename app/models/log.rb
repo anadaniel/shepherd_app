@@ -6,6 +6,12 @@ class Log < ActiveRecord::Base
 
   after_create :get_drone_from_mac_address, if: Proc.new { self.drone_mac_address.present? }
 
+  EVENTS = {
+    detected: 'detected',
+    new_detected: 'new_detected',
+    taking_control: 'taking_control'
+  }
+
   def ground_station_area_id
     self.ground_station.area_id
   end
@@ -14,7 +20,7 @@ class Log < ActiveRecord::Base
     drone = Drone.find_or_initialize_by mac_address: self.drone_mac_address
 
     if drone.new_record?
-      self.event = 'new_detected'
+      self.event = EVENTS[:new_detected]
       drone.save
     end
 

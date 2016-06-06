@@ -13,5 +13,6 @@ RSpec.describe GroundStation, type: :model do
 
   context 'associations' do
     it { is_expected.to have_many :logs }
+    it { is_expected.to have_one :controlled_drone }
   end
 end
