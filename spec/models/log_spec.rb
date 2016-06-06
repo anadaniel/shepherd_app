@@ -20,7 +20,7 @@ RSpec.describe Log, :type => :model do
   end
 
   context 'callbacks' do
-    describe 'get_drone_from_mac_address' do
+    describe '#get_drone_from_mac_address' do
       context 'when the drone does not exist' do
         before do
           @log = FactoryGirl.build :log, event: 'detected', drone_mac_address: '34:13:E8:35:30:1D'
@@ -48,6 +48,36 @@ RSpec.describe Log, :type => :model do
 
         it 'keeps the event as "detected"' do
           expect(@log.event).to eq("detected")
+        end
+      end
+    end
+
+    describe '#set_drone_controlled_by' do
+      before { @drone = FactoryGirl.create :drone, mac_address: '34:13:E8:35:30:1D' }
+
+      context 'when the event is "taking_control"' do
+        before do
+          @log = FactoryGirl.build :log, event: 'taking_control', drone_mac_address: @drone.mac_address
+          @log.save
+          @log.reload
+          @drone.reload
+        end
+
+        it 'sets the drone\'s controlled by to the log\' ground station' do
+          expect(@drone.controlled_by_id).to eq(@log.ground_station_id)
+        end
+      end
+
+      context 'when the event is not "taking_control"' do
+        before do
+          @log = FactoryGirl.build :log, event: 'detected', drone_mac_address: @drone.mac_address
+          @log.save
+          @log.reload
+          @drone.reload
+        end
+
+        it 'sets the drone\'s controlled by to the log\' ground station' do
+          expect(@drone.controlled_by_id).to be_nil
         end
       end
     end

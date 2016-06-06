@@ -5,6 +5,7 @@ class Log < ActiveRecord::Base
   validates :event, presence: true
 
   after_create :get_drone_from_mac_address, if: Proc.new { self.drone_mac_address.present? }
+  after_create :set_drone_controlled_by, if: Proc.new { self.event == EVENTS[:taking_control] }
 
   EVENTS = {
     detected: 'detected',
@@ -26,5 +27,10 @@ class Log < ActiveRecord::Base
 
     self.drone = drone
     self.save
+  end
+
+  def set_drone_controlled_by
+    drone = self.drone
+    drone.update({ controlled_by_id: self.ground_station_id })
   end
 end
