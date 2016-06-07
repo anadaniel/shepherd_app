@@ -15,7 +15,7 @@ returns
         "event": "ground_station_started"
       },
       {
-        "id": 1,
+        "id": 2,
         "event": "detected",
         "drone_id": 1
         "drone_mac_address": '34:13:E8:35:30:2D'
@@ -23,11 +23,12 @@ returns
     ]
   }
 ```
+
 #### POST  /api/ground_stations/:ground_station_id/logs
 receives
 ```
   {
-    "event": "ground_station_started",
+    "event": "detected"
     "drone_mac_address": '34:13:E8:35:30:2D'
   }
 ```
@@ -35,11 +36,13 @@ receives
 returns
 ```
   {
-    "id": 1,
-    "event": "ground_station_started",
-    "drone_id": 1
-    "drone_mac_address": '34:13:E8:35:30:2D',
-    "ground_station_area_id": 1
+    "log": {
+      "id": 1,
+      "event": "detected",
+      "drone_id": 1
+      "drone_mac_address": '34:13:E8:35:30:2D',
+      "ground_station_area_id": 1
+    }
   }
 ```
 
@@ -53,46 +56,72 @@ returns
         "id": 1,
         "area_id": 1,
         "lat": "25.685243",
-        "long": "-100.323019"
+        "long": "-100.323019",
+        "mac_address": "34:13:E8:35:30:2D"
       }
     ]
+  }
+```
+
+#### GET   /api/ground_stations/:id
+returns
+```
+  {
+    "ground_station": {
+      "id": 1,
+      "area_id": 1,
+      "lat": "25.685243",
+      "long": "-100.323019",
+      "mac_address": "34:13:E8:35:30:2D"
+    }
   }
 ```
 
 #### POST  /api/ground_stations
 receives
 ```
-  {
-    "area_id": 1,
-    "lat": "25.685243",
-    "long": "-100.323019"
+ { 
+    "ground_station": {
+      "area_id": 1,
+      "lat": 25.678653, 
+      "long": -100.284270,
+      "mac_address": "34:13:E8:35:30:2D"
+    }
   }
 ```
 
 returns
 ```
-  {
-    "id": 1,
-    "area_id": 1,
-    "lat": "25.685243",
-    "long": "-100.323019"
+  { 
+    "ground_station": {
+      "id": 1,
+      "area_id": 1,
+      "lat": "25.678653", 
+      "long": "-100.284270",
+      "mac_address": "34:13:E8:35:30:2D"
+    }
   }
 ```
 
 #### PATCH/PUT /api/ground_stations/:id
 receives
 ```
-  {
-    "long": "-200.000000"
+  { 
+    "ground_station": {
+      "long": -100.284270
+    }
   }
 ```
 
 returns
 ```
-  {
-    "id": 1,
-    "area_id": 1,
-    "lat": "25.685243",
-    "long": "-200.000000"
+  { 
+    "ground_station": {
+      "id": 1,
+      "area_id": 1,
+      "lat": 25.678653, 
+      "long": -100.284270,
+      "mac_address": "34:13:E8:35:30:2D"
+    }
   }
 ```
