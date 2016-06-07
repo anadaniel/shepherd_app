@@ -8,6 +8,7 @@ gem "rails", "4.2.1"
 gem "pg"
 gem "puma"
 gem "rack-cors", :require => "rack/cors"
+gem "redis", "3.3.0"
 
 group :development do
   gem "spring"

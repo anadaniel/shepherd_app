@@ -6,6 +6,7 @@ class Log < ActiveRecord::Base
 
   after_create :get_drone_from_mac_address, if: Proc.new { self.drone_mac_address.present? }
   after_create :set_drone_controlled_by, if: Proc.new { self.event == EVENTS[:taking_control] }
+  after_create :publish_to_redis
 
   EVENTS = {
     detected: 'detected',
@@ -32,5 +33,9 @@ class Log < ActiveRecord::Base
   def set_drone_controlled_by
     drone = self.drone
     drone.update({ controlled_by_id: self.ground_station_id })
+  end
+
+  def publish_to_redis
+    $redis.publish 'logs.create', self.attributes.to_json
   end
 end
