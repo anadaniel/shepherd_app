@@ -52,4 +52,14 @@ RSpec.describe Api::V1::GroundStationsController, type: :controller do
     it { expect(json_response).to have_key(:ground_station) }
     it { expect(json_response[:ground_station][:long]).to eq '-100.0' }
   end
+
+  describe "DELETE #destroy" do
+    before do
+      @ground_station = FactoryGirl.create :ground_station
+      delete :destroy, { id: @ground_station.id }
+    end
+
+    it { should respond_with :no_content }
+    it { expect{ @ground_station.reload }.to raise_error( ActiveRecord::RecordNotFound )  }
+  end
 end

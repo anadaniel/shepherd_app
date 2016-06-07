@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       
       resources :logs, only: [:index]
 
-      resources :ground_stations, only: [:index, :show, :create, :update] do
+      resources :ground_stations do
         resources :logs, only: [:create]
       end
 

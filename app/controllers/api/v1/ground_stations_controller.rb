@@ -31,6 +31,16 @@ class Api::V1::GroundStationsController < ApplicationController
     end
   end
 
+  def destroy
+    ground_station = GroundStation.find_by id: params[:id]
+    if ground_station.present? 
+      ground_station.delete
+      head :no_content
+    else
+      head :not_found
+    end
+  end
+
   private
     def ground_station_params
       params.require(:ground_station).permit(:area_id, :lat, :long, :mac_address)

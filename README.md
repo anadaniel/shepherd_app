@@ -125,3 +125,5 @@ returns
     }
   }
 ```
+
+#### DELETE /api/ground_stations/:id
