@@ -9,6 +9,7 @@ RSpec.describe GroundStation, type: :model do
     it { is_expected.to respond_to :area_id }
     it { is_expected.to respond_to :lat }
     it { is_expected.to respond_to :long }
+    it { is_expected.to respond_to :mac_address }
   end
 
   context 'associations' do

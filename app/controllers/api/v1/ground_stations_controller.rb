@@ -4,6 +4,15 @@ class Api::V1::GroundStationsController < ApplicationController
     render json: ground_stations, status: :ok
   end
 
+  def show
+    ground_station = GroundStation.find_by id: params[:id]
+    if ground_station.present?
+      render json: ground_station, status: :ok
+    else
+      head :not_found
+    end
+  end
+
   def create
     ground_station = GroundStation.new ground_station_params
     if ground_station.save
@@ -24,6 +33,6 @@ class Api::V1::GroundStationsController < ApplicationController
 
   private
     def ground_station_params
-      params.require(:ground_station).permit(:area_id, :lat, :long)
+      params.require(:ground_station).permit(:area_id, :lat, :long, :mac_address)
     end
 end
