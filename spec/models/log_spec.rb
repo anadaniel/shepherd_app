@@ -57,9 +57,7 @@ RSpec.describe Log, :type => :model do
 
       context 'when the event is "taking_control"' do
         before do
-          @log = FactoryGirl.build :log, event: 'taking_control', drone_mac_address: @drone.mac_address
-          @log.save
-          @log.reload
+          @log = FactoryGirl.create :log, event: 'taking_control', drone_mac_address: @drone.mac_address
           @drone.reload
         end
 
@@ -70,13 +68,23 @@ RSpec.describe Log, :type => :model do
 
       context 'when the event is not "taking_control"' do
         before do
-          @log = FactoryGirl.build :log, event: 'detected', drone_mac_address: @drone.mac_address
-          @log.save
-          @log.reload
+          @log = FactoryGirl.create :log, event: 'detected', drone_mac_address: @drone.mac_address
           @drone.reload
         end
 
-        it 'sets the drone\'s controlled by to the log\' ground station' do
+        it 'the drone\'s controlled by remains nil' do
+          expect(@drone.controlled_by_id).to be_nil
+        end
+      end
+
+      context 'when the event is not "taking_control"' do
+        before do
+          @drone.update({ controlled_by_id: 1 })
+          @log = FactoryGirl.create :log, event: 'lost_control', drone_mac_address: @drone.mac_address
+          @drone.reload
+        end
+
+        it 'the drone\'s controlled by remains nil' do
           expect(@drone.controlled_by_id).to be_nil
         end
       end
