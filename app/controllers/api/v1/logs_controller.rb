@@ -1,6 +1,6 @@
 class Api::V1::LogsController < ApplicationController
   def index
-    logs = Log.includes(:ground_station).all
+    logs = Log.includes(:ground_station).all.order("created_at DESC").limit(15)
     render json: logs, status: :ok
   end
 
