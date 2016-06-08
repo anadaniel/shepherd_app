@@ -43,6 +43,6 @@ class Log < ActiveRecord::Base
     end
 
     def publish_to_redis
-      $redis.publish 'logs.create', self.attributes.to_json
+      $redis.publish 'logs.create', ::LogSerializer.new(self).to_json
     end
 end
