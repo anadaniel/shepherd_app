@@ -28,8 +28,10 @@ returns
 receives
 ```
   {
-    "event": "detected"
-    "drone_mac_address": '34:13:E8:35:30:2D'
+    "log": {
+      "event": "detected",
+      "drone_mac_address": "34:13:E8:35:30:2D"
+    }
   }
 ```
 
@@ -40,7 +42,7 @@ returns
       "id": 1,
       "event": "detected",
       "drone_id": 1
-      "drone_mac_address": '34:13:E8:35:30:2D',
+      "drone_mac_address": "34:13:E8:35:30:2D",
       "ground_station_area_id": 1
     }
   }
