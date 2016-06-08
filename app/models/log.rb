@@ -19,6 +19,10 @@ class Log < ActiveRecord::Base
     self.ground_station.area_id
   end
 
+  def created_at_time
+    self.created_at.to_s(:time)
+  end
+
   private
     def get_drone_from_mac_address
       drone = Drone.find_or_initialize_by mac_address: self.drone_mac_address
