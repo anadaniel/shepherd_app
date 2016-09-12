@@ -14,7 +14,7 @@ The final **ShepherD** product is an integration of the App, the Ground Station 
   bundle install # install gems
   rails s # run server
 ```
-The previous code will have the App running and the Ground Station will be able to communicate with it. In order for the Client to receive the logs in real-time, you need to run a redis server as well. More info [here](http://redis.io/topics/quickstart).
+The previous code will have the App running and the Ground Station will be able to communicate with it. We assume that your computer has the configuration needed to run Ruby on Rails projects. You will also need [postgresql](https://www.postgresql.org/) installed. In order for the Client to receive the logs in real-time, you need to run a redis server as well. More info [here](http://redis.io/topics/quickstart).
 
 ## Endpoints and JSON structures
 
